@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import BackgroundEffects from './components/BackgroundEffects'
 import AudioPlayer from './components/AudioPlayer'
 import HeroEnvelope from './components/HeroEnvelope'
@@ -17,10 +18,14 @@ export default function App() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
   // Start procedural Indian classical flute ambient synthesizer on first envelope tap
-  const handleOpenEnvelope = () => {
-    setIsEnvelopeOpened(true)
+  const handleStartAudio = () => {
     ambientAudio.play()
     setIsAudioPlaying(true)
+  }
+
+  // Smooth unmounting after card reveals and fades into main page
+  const handleEnvelopeComplete = () => {
+    setIsEnvelopeOpened(true)
   }
 
   // Floating button audio toggle
@@ -46,13 +51,23 @@ export default function App() {
         onToggle={handleToggleAudio}
       />
 
-      {/* 3. The 3D Digital Envelope Interaction (100% Vector Art & Pure A&S Seal) */}
-      {!isEnvelopeOpened && (
-        <HeroEnvelope onOpenEnvelope={handleOpenEnvelope} />
-      )}
+      {/* 3. The 3D Digital Envelope Interaction (Silky-Smooth Card Sliding & Unsealing) */}
+      <AnimatePresence mode="wait">
+        {!isEnvelopeOpened && (
+          <HeroEnvelope
+            onStartAudio={handleStartAudio}
+            onComplete={handleEnvelopeComplete}
+          />
+        )}
+      </AnimatePresence>
 
-      {/* 4. Main Royal Wedding Invitation Website */}
-      <main className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6">
+      {/* 4. Main Royal Wedding Invitation Website with Gentle Fade-In */}
+      <motion.main
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6"
+      >
         {/* Grand Hero Section with Monogram & Typography */}
         <MainHero />
 
@@ -76,7 +91,7 @@ export default function App() {
 
         {/* Venue Details, Google Maps Link, Blessings Form & Cinematic Sign-Off */}
         <FooterSignOff />
-      </main>
+      </motion.main>
     </div>
   )
 }

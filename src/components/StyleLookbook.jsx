@@ -244,17 +244,6 @@ export default function StyleLookbook() {
                 {/* Decorative Double Gold Inset Hairline */}
                 <div className="absolute inset-2 border border-[#DFBF77]/40 rounded-2xl pointer-events-none" />
 
-                {/* Filter Lens Badge at Top */}
-                <div className="absolute top-5 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#DFBF77]/70 text-[#8B6508] text-[10px] font-['Montserrat'] font-bold uppercase tracking-wider shadow-sm">
-                    <Wand2 className="w-3 h-3 text-[#D4AF37]" />
-                    <span>Suggested Attire: {activeTab.name}</span>
-                  </div>
-                  <div className="w-6 h-6 rounded-full bg-white/90 backdrop-blur-md border border-[#DFBF77]/70 flex items-center justify-center text-[#8B6508] shadow-sm">
-                    <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-                  </div>
-                </div>
-
                 {/* Fixed Aspect Ratio Framed Container (3:4 ratio guarantees no layout shift) */}
                 <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[#DFBF77]/60 shadow-inner flex items-center justify-center">
                   <AnimatePresence mode="wait">
